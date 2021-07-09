@@ -4,6 +4,7 @@ import numpy as np
 from sklearn import datasets
 import matplotlib.pyplot as plt
 
+# Generating some data
 X_numpy, y_numpy = datasets.make_regression(n_samples=100, n_features=1, noise = 20, random_state=1)
 
 X = torch.from_numpy(X_numpy.astype(np.float32))
@@ -13,7 +14,7 @@ y = y.view(y.shape[0], 1)
 n_samples, n_features = X.shape
 
 # Define model
-model = nn.Linear(n_features, n_features)
+model = nn.Linear(n_features, 1)
 
 # Loss and optimizer
 criterion = nn.MSELoss()
@@ -26,10 +27,13 @@ for epoch in range(n_epochs):
 
     loss = criterion(y_pred, y)
 
+    # Compute gradients
     loss.backward()
 
+    # Update weights
     op.step()
 
+    # Clears grad computations
     op.zero_grad()
 
     if epoch % 10 == 0:
