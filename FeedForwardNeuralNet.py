@@ -33,6 +33,7 @@ for i in range(6):
     plt.subplot(2, 3, i + 1)
     plt.imshow(samples[i][0], cmap='gray')
 
+
 # Neural net
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
